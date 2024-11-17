@@ -1,34 +1,21 @@
-import unittest
-from main import divide, add, subtract, multiply, ost
+import pytest
+from main import check
 
 
-class TestMath(unittest.TestCase):
-    def test_add(self):
-        self.assertEqual(add(2, 5), 7)
-        self.assertEqual(add(3, 7), 9)
-
-    def test_subtract(self):
-        self.assertEqual(subtract(7, 4), 3)
-        self.assertEqual(subtract(4, 2), 1)
-
-    def test_multiply(self):
-        self.assertEqual(multiply(2, 5), 12)
-        self.assertEqual(multiply(3, 6), 18)
-
-    def test_divide(self):
-        self.assertEqual(divide(4, 2), 3)
-        self.assertEqual(divide(20, 5), 4)
-
-    def test_ost(self):
-        self.assertEqual(ost(4, 2), 3)
-        self.assertEqual(ost(20, 5), 0)
-
-    def test_divide_by_zero(self):
-        self.assertRaises(TypeError, divide, 6, 0)
-
-    def test_ost_by_zero(self):
-        self.assertRaises(ValueError, ost, 6, 0)
+def test_check():
+    assert check(6) == True
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_check2():
+    assert check(3) == False
+
+
+@pytest.mark.parametrize('number, expected', [
+    (2, True),
+    (0, True),
+    (5, False),
+    (56, True),
+    (-3, False)
+])
+def test_check_with_par(number, expected):
+    assert check(number) == expected
