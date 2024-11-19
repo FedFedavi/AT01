@@ -19,7 +19,7 @@ def add_user(conn, name, age):
     conn.commit()
 
 
-def get_user(conn, name, age):
+def get_user(conn, name):
     cursor = conn.cursor()
     cursor.execute('''
     SELECT * FROM users WHERE name=?''', (name,))
