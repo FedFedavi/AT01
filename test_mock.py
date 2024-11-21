@@ -20,3 +20,17 @@ def test_get_weather(mocker):
         'weather': [{'description': 'clear sky'}],
         'main': {'temp': 10}
     }
+
+
+def test_get_weather_error(mocker):
+    mock_get = mocker.patch('main_mock.requests.get')
+    mock_get.return_value.status_code = 404
+
+    api_key = '94b58f3cb159aaa05717dbdced298c8a'
+    city = 'London'
+
+    weather_data = get_weather(api_key, city)
+
+    assert weather_data == None
+
+
